@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Globalization;
 
 namespace debugws2
@@ -13,6 +14,7 @@ namespace debugws2
 
       for (int x = 0; x < data.Length; x++)
       {
+        
         total += cnv(data[x]);
       }
 
@@ -21,6 +23,12 @@ namespace debugws2
 
     private int cnv(string val)
     {
+      if(val.Contains('G'))
+      {
+      char[] ch = val.ToCharArray();
+       ch[4] = 'E'; // index starts at 0!
+      val = new string (ch);
+      }
       Int32.TryParse(val, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int value);
 
       return value;
